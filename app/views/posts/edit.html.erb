@@ -1,0 +1,10 @@
+<%= form_for @post, url: post_path(@post), method: :patch do |f| %>
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+
+	<%= f.label :content %>
+	<%= f.text_field :content %>
+			
+	<%= f.submit %>
+<% end  %>
+<%= link_to "Cancel", post_path(@post) %>

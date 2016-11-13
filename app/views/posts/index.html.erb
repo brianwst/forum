@@ -1,0 +1,30 @@
+<div class="container">	
+	<h1>Forum</h1>
+
+	<table class="table">
+		<tr>
+			<th>Post</th>
+			<th>Creator</th>
+			<th>Categories</th>
+			<th>Last Comment</th>
+		</tr>
+		<tbody>
+			<% @posts.each do |post| %>
+			<tr>
+				<td><%= link_to "#{post.title}", post_path(post) %></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>
+			
+				</td>
+			</tr>
+			<% end %>
+		</tbody>	
+
+
+
+	</table>
+
+	<%= link_to "New Post", new_post_path, class: "btn btn-default" %>
+</div>
