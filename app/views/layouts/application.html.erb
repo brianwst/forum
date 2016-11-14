@@ -9,6 +9,14 @@
   </head>
 
   <body>
+  <% if current_user %>
+    <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+    <%= link_to('修改密碼', edit_registration_path(:user)) %>
+  <% else %>
+    <%= link_to('註冊', new_registration_path(:user)) %> |
+    <%= link_to('登入', new_session_path(:user)) %>
+  <% end %>
+  
     <p style="background-color: green, color: white"><%= flash[:notice] %></p>
     <p style="background-color: red, color: white"><%= flash[:alert] %></p>
   	<p class="notice"><%= notice %></p>
