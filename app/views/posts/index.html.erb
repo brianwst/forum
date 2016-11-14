@@ -8,6 +8,7 @@
 			<th>Posting time</th>
 			<th>Categories</th>
 			<th>Last Comment</th>
+			<th>Number of Comments</th>
 		</tr>
 		<tbody>
 			<% @posts.each do |post| %>
@@ -17,9 +18,7 @@
 				<td><%= time_ago_in_words(post.created_at) %></td>
 				<td></td>
 				<td></td>
-				<td>
-			
-				</td>
+				<td><%= post.comments.count %></td>
 			</tr>
 			<% end %>
 		</tbody>	
@@ -27,6 +26,8 @@
 
 
 	</table>
+	<% if user_signed_in? %>
+		<%= link_to "New Post", new_post_path, class: "btn btn-default" %>
+	<% end %>
 
-	<%= link_to "New Post", new_post_path, class: "btn btn-default" %>
 </div>

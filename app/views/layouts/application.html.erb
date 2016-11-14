@@ -17,10 +17,16 @@
     <%= link_to('登入', new_session_path(:user)) %>
   <% end %>
   
-    <p style="background-color: green, color: white"><%= flash[:notice] %></p>
-    <p style="background-color: red, color: white"><%= flash[:alert] %></p>
-  	<p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <%if flash[:notice]  %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <%elsif flash[:notice]  %>
+    <div class="alert alert-warning"> 
+      <%= flash[:alert] %>
+    </div>
+  <%end  %>
+
     <%= yield %>
   </body>
 </html>

@@ -2,7 +2,18 @@
 	<h1><%= @post.title %> by <%= @post.user.email %></h1>
 
 	<p><%= @post.content %></p>
+	
+	<% @post.comments.each do |comment| %>
+		<div class="container">
+			<p><%= comment.content %></p>
+		</div>
+	<% end  %>
 
+	<%= form_for @comment, :url => post_comments_path(@post) do |f| %>
+		<%= f.text_field :content %>
+		<%= f.submit "Reply" %>
+	<% end %>
+	
 	<%= link_to "Edit", edit_post_path(@post), class: 'btn btn-default' %> 
 	<%= link_to "Delete", post_path(@post), method: :delete, class: "btn btn-danger" %>
 
