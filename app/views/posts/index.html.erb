@@ -16,7 +16,7 @@
 				<td><%= link_to "#{post.title}", post_path(post) %></td>
 				<td><%= post.user.email %></td>
 				<td><%= time_ago_in_words(post.created_at) %></td>
-				<td></td>
+				<td><%= post.categories.pluck(:name).join(" ") %></td>
 				<td></td>
 				<td><%= post.comments.count %></td>
 			</tr>
