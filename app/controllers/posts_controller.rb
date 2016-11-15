@@ -2,11 +2,12 @@ class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@posts = Post.all
+		@posts = Post.all.includes(:user)
 	end
 
 	def show
-		@comment = @post.comments.build
+		@comment = Comment.new
+		@comments = @post.comments.includes(:user)
 	end
 
 	def new

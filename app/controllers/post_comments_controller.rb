@@ -1,5 +1,6 @@
 class PostCommentsController < ApplicationController
 	before_action :find_post
+
 	def new
 		@comment = @post.comments.build
 	end
@@ -16,6 +17,21 @@ class PostCommentsController < ApplicationController
 		end
 	end
 
+	def edit
+		@comment = @post.comments.find(params[:id])
+	end
+
+	def update
+		@comment = @post.comments.find(params[:id])
+	end
+
+
+	def destroy
+		@comment = @post.comments.find(params[:id])
+		@comment.destroy
+		redirect_to post_path(@post)
+	end
+
 	private 
 	def find_post
 		@post = Post.find(params[:post_id])
@@ -24,4 +40,5 @@ class PostCommentsController < ApplicationController
 	def comment_params
 		params.require(:comment).permit(:content, :user_id, :post_id)
 	end
+
 end
