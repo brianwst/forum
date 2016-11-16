@@ -1,5 +1,5 @@
 
-	<%= form_for @comment, :url => post_comments_path(@post, @comment), method: :patch do |f| %>
+	<%= form_for @comment, :url => post_comment_path(@post, @comment), :method => :patch do |f| %>
 		<%= f.text_field :content %>
 		<%= f.submit "Update reply" %>
 	<% end %>

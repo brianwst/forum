@@ -1,8 +1,22 @@
 class PostsController < ApplicationController
+	before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
 	before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@posts = Post.all.includes(:user)
+		@posts = Post.all
+		case params[:order] 
+		when "last_comment"
+			sort_by = "comments.created_at DESC"
+			@posts = @posts.includes(:comments, :user).order(sort_by)
+		when "no_of_comments"
+			sort_by = "comments_count DESC"
+			@posts = @posts.includes(:comments, :user).order(sort_by)
+		else
+			@posts = @posts.includes(:user)
+		end
+
+
+
 	end
 
 	def show

@@ -7,9 +7,12 @@
 		<div class="container reply">
 			<%= comment.content %>
 			<%= comment.user.email %>
-			<%= link_to "delete", post_comment_path(@post, comment), method: :delete %>
-			<%= link_to "edit", edit_post_comment_path(@post, comment) %>
+			<%= time_ago_in_words(comment.updated_at) %>
 
+			<% if current_user.id == comment.user_id %>
+				<%= link_to "delete", post_comment_path(@post, comment), method: :delete %>
+				<%= link_to "edit", edit_post_comment_path(@post, comment) %>
+			<% end %>
 		</div>
 	<% end %>
 
@@ -20,8 +23,10 @@
 		<%= f.submit "Reply" %>
 	<% end %>
 	
-	<%= link_to "Edit", edit_post_path(@post), class: 'btn btn-default' %> 
-	<%= link_to "Delete", post_path(@post), method: :delete, class: "btn btn-danger" %>
+	<% if current_user.id == @post.user_id %>
+		<%= link_to "Edit", edit_post_path(@post), class: 'btn btn-default' %> 
+		<%= link_to "Delete", post_path(@post), method: :delete, class: "btn btn-danger" %>
+	<%end  %>
 
 	<%= link_to "Home", posts_path %>
 </div>

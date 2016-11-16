@@ -1,14 +1,14 @@
 <div class="container">	
 	<h1>Forum</h1>
-
+	<%= Time.now %>
 	<table class="table">
 		<tr>
 			<th>Post</th>
 			<th>Creator</th>
 			<th>Posting time</th>
 			<th>Categories</th>
-			<th>Last Comment</th>
-			<th>Number of Comments</th>
+			<th><%= link_to "Last Comment", posts_path(:order => "last_comment") %></th>
+			<th><%= link_to "Number of Comments", posts_path(:order => "no_of_comments") %></th>
 		</tr>
 		<tbody>
 			<% @posts.each do |post| %>
@@ -17,8 +17,8 @@
 				<td><%= post.user.email %></td>
 				<td><%= time_ago_in_words(post.created_at) %></td>
 				<td><%= post.categories.pluck(:name).join(" ") %></td>
-				<td></td>
-				<td><%= post.comments.count %></td>
+				<td><%= post.comments.last.try(:created_at) %></td>
+ 				<td><%= post.comments.count %></td>
 			</tr>
 			<% end %>
 		</tbody>	
