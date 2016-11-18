@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
 	def index
 		@posts = Post.all
+		
 		case params[:order] 
 		when "last_comment"
 			sort_by = "comments.created_at DESC"
@@ -15,6 +16,18 @@ class PostsController < ApplicationController
 			@posts = @posts.includes(:user)
 		end
 
+		case params[:sort]
+		when "science"
+			@posts = Category.find_by(name: "Science").posts
+		when "sports"
+			@posts = Category.find_by(name: "Sports").posts
+		when "music"
+			@posts = Category.find_by(name: "Music").posts
+		when "current_affair"
+			@posts = Category.find_by(name: "Current Affairs").posts
+		else
+			@posts = @posts.all
+		end
 
 
 	end
@@ -56,6 +69,12 @@ class PostsController < ApplicationController
 		@post.destroy
 		flash[:alert] = "Post has been deleted!"
 		redirect_to posts_path
+	end
+
+	def about
+		@users = User.all
+		@comments = Comment.all
+		@posts = Post.all
 	end
 
 	private

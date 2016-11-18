@@ -1,6 +1,14 @@
-<div class="container">	
-	<h1>Forum</h1>
+
+<div id="main" class="container">	
+	
 	<%= Time.now %>
+	<ul class="nav nav-tabs">
+	  <li role="presentation" class="active"><%= link_to "All", posts_path %></li>
+	  <li role="presentation" ><%= link_to "Science", posts_path(:sort => "science") %></li>
+	  <li role="presentation"><%= link_to "Sports", posts_path(:sort => "sports") %></li>
+	  <li role="presentation"><%= link_to "Music", posts_path(:sort => "music") %></li>
+	  <li role="presentation"><%= link_to "Current Affairs", posts_path(:sort => "current_affair") %></li>
+	</ul>
 	<table class="table">
 		<tr>
 			<th>Post</th>

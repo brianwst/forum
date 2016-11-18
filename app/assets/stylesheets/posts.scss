@@ -6,3 +6,33 @@
 	background-color: #ccc;
 	margin-top: 1em;
 }
+
+#bs-example-navbar-collapse-1 {
+	position: relative;
+}
+
+.navbar-fixed-top {
+    padding-top: 30px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.navbar-fixed-top .nav {
+    padding: 15px 0;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 0 15px;
+}
+
+.navbar-fixed-top .nav {
+    padding: 15px 0;
+}
+
+.navbar-fixed-top .navbar-brand {
+    padding: 0 15px;
+}
+
+#nav {
+    float: right;
+}
