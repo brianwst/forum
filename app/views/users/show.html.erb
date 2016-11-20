@@ -1,0 +1,50 @@
+<div class="container">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title"><%= @user.email %>'s Description</h3>
+  </div>
+  <div class="panel-body">
+    <%= @user.description %>
+  </div>
+</div>
+
+
+	<div class="container">
+		<table class="table">
+				<tr>
+					<th>Post Title</th>
+					<th>Content</th>
+					<th>Creating Time</th>
+				</tr>
+			<% @user.posts.each do |post| %>
+				<tr>
+					<td>
+						<h3><%= link_to "#{post.title}", post_path(post) %></h3>
+					</td>
+					<td><p><%= post.content %></p></td>
+					<td><%= post.created_at %></td>
+				</tr>
+			<% end  %>
+		</table>
+	</div>
+<h2>Your replies</h2>
+	<div class="container">
+		<table class="table">
+				<tr>
+					<th>Content</th>
+					<th>In reply to</th>
+					<th>Creating Time</th>
+				</tr>
+			<% @comments.each do |comment| %>
+				<tr>
+					<td>
+						<h3><%= link_to "#{comment.content}", post_path(comment.post_id) %></h3>
+					</td>
+					<td><%= comment.post.title %></td>
+					<td><%= comment.created_at %></td>
+				</tr>
+			<% end  %>
+		</table>
+	</div>
+</div>
