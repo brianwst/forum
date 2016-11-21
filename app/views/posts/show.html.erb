@@ -2,7 +2,8 @@
 	<h1><%= @post.title %> by <%= @post.user.email %></h1>
 
 	<p><%= @post.content %></p>
-	
+	<p><%= @post.viewcount %></p>
+
 	<% @comments.each do |comment| %>
 		<div class="container reply">
 			<%= comment.content %>

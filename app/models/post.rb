@@ -6,4 +6,9 @@ class Post < ApplicationRecord
 
 	has_many :post_categoryships
 	has_many :categories, through: :post_categoryships
+
+	def view!
+		self.viewcount += 1
+		self.save
+	end
 end

@@ -17,6 +17,7 @@
 			<th>Categories</th>
 			<th><%= link_to "Last Comment", posts_path(:order => "last_comment") %></th>
 			<th><%= link_to "Number of Comments", posts_path(:order => "no_of_comments") %></th>
+			<th><%= link_to "Number of views", posts_path(:order => "no_of_views") %></th>
 		</tr>
 		<tbody>
 			<% @posts.each do |post| %>
@@ -31,6 +32,7 @@
 					<td><%= post.comments.last.try(:created_at) %></td>
 				<% end %>
  				<td><%= post.comments.count %></td>
+ 				<td><%= post.viewcount %></td>
 			</tr>
 			<% end %>
 		</tbody>	

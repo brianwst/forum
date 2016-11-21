@@ -12,6 +12,8 @@ class PostsController < ApplicationController
 		when "no_of_comments"
 			sort_by = "comments_count DESC"
 			@posts = @posts.includes(:comments, :user).order(sort_by)
+		when "no_of_views"
+			@posts = @posts.includes(:comments, :user).order("posts.viewcount DESC")
 		else
 			@posts = @posts.includes(:user)
 		end
@@ -33,6 +35,7 @@ class PostsController < ApplicationController
 	end
 
 	def show
+		@post.view!
 		@comment = Comment.new
 		@comments = @post.comments.includes(:user)
 	end
