@@ -81,6 +81,21 @@ class PostsController < ApplicationController
 		@posts = Post.all
 	end
 
+
+	# how to add validation#
+	def bulk_update
+		ids = Array(params[:ids])
+		posts = ids.map{ |i| Post.find_by_id(i) }.compact
+		
+		if params[:commit] == "Delete selected posts"
+			posts.each{|e| e.destroy }
+			flash[:notice] = "Posts deleted successfully"
+		end
+
+		redirect_to posts_path
+	end
+
+
 	private
 	def find_post
 		@post = Post.find(params[:id])

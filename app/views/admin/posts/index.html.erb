@@ -32,26 +32,27 @@
 		<% end %>
 	  </div>
 	<div class="panel panel-default">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">Users panel</h3>
-	  </div>
-	  <div class="panel-body">
-		<table class="table">
-			<tr>
-				<th>User</th>
-				<th>User's profile</th>
-				<th>User's role</th>
-			</tr>
-			<% @users.each do |user| %>
+		<div class="panel-heading">
+			<h3 class="panel-title">Users panel</h3>
+		</div>
+	  
+		<div class="panel-body">
+			<table class="table">
 				<tr>
-					<th><%= user.email %></th>
-					<th><%= link_to "User's profile", user_path(user.id) %></th>
-					<th><%= user.role %></th>
+					<th>User</th>
+					<th>User's profile</th>
+					<th>User's role</th>
 				</tr>
-			<% end %>
-		</table>
-
-	  </div>
+				<% @users.each do |user| %>
+					<tr>
+						<th><%= user.email %></th>
+						<th><%= link_to "User's profile", edit_admin_user_path(user) %></th>
+						<th><%= user.role %></th>
+					</tr>
+				<% end %>
+			</table>
+			
+		</div>
 	</div>
 
 
