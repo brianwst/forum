@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 			@posts = @posts.includes(:user)
 		end
 
+		
 		case params[:sort]
 		when "science"
 			@posts = Category.find_by(name: "Science").posts
