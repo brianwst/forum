@@ -28,10 +28,16 @@ class Admin::CategoriesController < ApplicationController
 		end
 	end
 
-
 	def destroy
 
 		if @category.destroy
+			flash[:notice] = "Category deleted"
+			redirect_to admin_posts_path
+		else
+			flash[:alert] = "Unable to delete"
+			render admin_posts_path
+		
+		end
 	end
 
 	private

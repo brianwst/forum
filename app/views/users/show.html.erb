@@ -2,9 +2,12 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title"><%= @user.email %>'s Description</h3>
+    <h2 class="panel-title" style="text-align: center"><%= @user.email %>'s Description</h3>
   </div>
-  <div class="panel-body">
+  <div class="center" style="text-align: center">
+  	<%= gravatar_for @user %>
+  </div>
+  <div class="panel-body" style="text-align: center">
     <%= @user.description %>
   </div>
 </div>
