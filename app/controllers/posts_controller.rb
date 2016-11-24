@@ -3,7 +3,8 @@ class PostsController < ApplicationController
 	before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@posts = Post.all
+		
+		@posts = Post.published
 		
 		case params[:order] 
 		when "last_comment"
@@ -38,7 +39,7 @@ class PostsController < ApplicationController
 	def show
 		@post.view!
 		@comment = Comment.new
-		@comments = @post.comments.includes(:user)
+		@comments = @post.comments.includes(:user).published
 	end
 
 	def new
@@ -47,20 +48,22 @@ class PostsController < ApplicationController
 
 	def create
 		@post = current_user.posts.build(post_params)
-
+		
 		if @post.save
 			flash[:notice] = "Successfully created post."
 			redirect_to posts_path 
 		else
 			render "new"
 		end
+		 
+
 	end
 
 	def edit
 	end
 
 	def update
-		
+
 		if @post.update(post_params)
 			flash[:notice] = "Successfully created updated."
 			redirect_to post_path(@post)
@@ -102,7 +105,7 @@ class PostsController < ApplicationController
 	end
 
 	def post_params
-		params.require(:post).permit(:title, :content, :category_ids => [])
+		params.require(:post).permit(:title, :content, :is_public, :category_ids => [])
 	end
 
 end

@@ -2,16 +2,27 @@
 	<h1>New Post</h1>
 
 	<%= form_for @post, :url => posts_path do |f| %>
-		<div class="form-group">
-			<%= f.label :title %>
-			<%= f.text_field :title %>
 
-			<%= f.label :content %>
-			<%= f.text_field :content %>
-
-			 <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
+			<div class="form-group">
+				<%= f.label :title %>
+				<%= f.text_field :title, class: "form-control"%>
+			</div>
 			
-			<%= f.submit %>
+			<div class="form-group", rows="5">
+				<%= f.label :content %>
+				<%= f.text_area :content, class: "form-control", rows: "5" %>
+			</div>
+				
+			<div class="form-group">
+			 	<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
+			 </div>
+			
+			<div class="form-group">
+				<%= f.label :is_public, "Drafting status" %>
+				<%= f.check_box :is_public, {}, false, true %>
+			</div>
+
+			<%= f.submit "Publish" %>
 		</div>
 	<% end %>
 

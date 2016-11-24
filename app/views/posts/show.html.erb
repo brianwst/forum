@@ -18,10 +18,15 @@
 	<% end %>
 
 
-
+	<h3>Reply</h3>
 	<%= form_for @comment, :url => post_comments_path(@post) do |f| %>
-		<%= f.text_field :content %>
-		<%= f.submit "Reply" %>
+		<div class="form-group">
+			<%= f.text_area :content, class: "form-control"%>
+			<%= f.label :is_public, "Draft status" %>
+			<%= f.check_box :is_public, {}, false, true %>
+			<br>
+			<%= f.submit "Reply", class: "btn btn-default"%>
+		</div>
 	<% end %>
 	
 	<% if current_user.id == @post.user_id %>

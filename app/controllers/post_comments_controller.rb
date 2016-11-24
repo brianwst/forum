@@ -5,6 +5,8 @@ class PostCommentsController < ApplicationController
 		@comment = @post.comments.build
 	end
 
+	
+
 	def show
 		##QUestion on how to solve this problem: can't assign user_id 
 		@comment = @post.comments.new(comment_params)
@@ -48,7 +50,7 @@ class PostCommentsController < ApplicationController
 	end
 
 	def comment_params
-		params.require(:comment).permit(:content, :user_id, :post_id)
+		params.require(:comment).permit(:content, :user_id, :post_id, :is_public)
 	end
 
 end

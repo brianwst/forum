@@ -19,6 +19,7 @@
 					<th>Post Title</th>
 					<th>Content</th>
 					<th>Creating Time</th>
+					<th>Status</th>
 				</tr>
 			<% @user.posts.each do |post| %>
 				<tr>
@@ -27,6 +28,13 @@
 					</td>
 					<td><p><%= post.content %></p></td>
 					<td><%= post.created_at %></td>
+					<td>
+						<% if post.is_public %>
+							Public
+						<% else %>
+							Draft
+						<% end %>
+					</td>
 				</tr>
 			<% end  %>
 		</table>
