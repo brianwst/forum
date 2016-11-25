@@ -35,6 +35,9 @@
                         <li>
                             <%= link_to('登入', new_session_path(:user)) %>
                         </li>
+                        <li>
+                            <%= link_to "登入 Facebook", user_facebook_omniauth_authorize_path %>
+                        </li>
                     <% end %>
                 </ul>
                  <ul class="nav navbar-nav">

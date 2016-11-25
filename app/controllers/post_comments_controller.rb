@@ -5,9 +5,9 @@ class PostCommentsController < ApplicationController
 		@comment = @post.comments.build
 	end
 
-	
 
-	def show
+
+	def create
 		##QUestion on how to solve this problem: can't assign user_id 
 		@comment = @post.comments.new(comment_params)
 		@comment.user = current_user

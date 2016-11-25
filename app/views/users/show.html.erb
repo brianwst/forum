@@ -46,6 +46,7 @@
 					<th>Content</th>
 					<th>In reply to</th>
 					<th>Creating Time</th>
+					<th>Status</th>
 				</tr>
 			<% @comments.each do |comment| %>
 				<tr>
@@ -54,6 +55,12 @@
 					</td>
 					<td><%= comment.post.title %></td>
 					<td><%= comment.created_at %></td>
+					<td><% if comment.is_public %>
+							Published
+						<% else %>
+							Draft
+						<% end %>
+					</td>
 				</tr>
 			<% end  %>
 		</table>
