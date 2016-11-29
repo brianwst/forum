@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
 	before_action :set_user, :except => [:index]
+
 	def show		
 		@comments = @user.comments.includes(:post)
+		@bookmark = @user.bookmark_posts
+
 	end
 
 	def edit

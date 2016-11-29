@@ -7,17 +7,19 @@ Rails.application.routes.draw do
 
 
     namespace :admin do
-    	resources :categories
+        resources :categories
     	resources :posts
-      resources :users
+        resources :users
     end
 
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 	resources :posts do
 		resources :comments, :controller => 'post_comments'
+        resources :bookmarks, only: [:create, :destroy]
+
 		collection do
         	get :about
-          post :bulk_update
+            post :bulk_update
     	end
 	end
 

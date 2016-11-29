@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
 	before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
-	before_action :find_post, only: [:show, :edit, :update, :destroy]
-
+	before_action :find_post, only: [ :show, :edit, :update, :destroy]
 	def index
 		
 		@posts = Post.published
@@ -28,12 +27,12 @@ class PostsController < ApplicationController
 		when "music"
 			@posts = Category.find_by(name: "Music").posts
 		when "current_affair"
-			@posts = Category.find_by(name: "Current Affairs").posts
+			@posts = Category.find_by(name: "Cuent Affairs").posts
 		else
 			@posts = @posts.all
 		end
 
-
+		
 	end
 
 	def show

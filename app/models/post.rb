@@ -7,6 +7,9 @@ class Post < ApplicationRecord
 	has_many :post_categoryships
 	has_many :categories, through: :post_categoryships
 
+	has_many :bookmarks, :dependent => :destroy
+	has_many :bookmark_users, through: :bookmarks, source: "user"
+	
 	scope :published, -> {where(is_public: true)}
 	scope :draft, -> {where(is_public: false)}
 

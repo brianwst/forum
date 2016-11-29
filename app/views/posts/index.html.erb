@@ -18,8 +18,8 @@
 			<th>Posting time</th>
 			<th>Categories</th>
 			<th><%= link_to "Last Comment", posts_path(:order => "last_comment") %></th>
-			<th><%= link_to "Number of Comments", posts_path(:order => "no_of_comments") %></th>
-			<th><%= link_to "Number of views", posts_path(:order => "no_of_views") %></th>
+			<th><%= link_to "Number of Comments", posts_path(:order => "no_of_comments") %> / <%= link_to "Number of views", posts_path(:order => "no_of_views") %></th>
+			<th>Bookmark</th>
 		</tr>
 		<tbody>
 			<% if current_user && current_user.role == 'admin' %>
@@ -36,8 +36,15 @@
 							<% else  %>
 								<td><%= post.comments.last.try(:created_at) %></td>
 							<% end %>
-			 				<td><%= post.comments.count %></td>
-			 				<td><%= post.viewcount %></td>
+			 				<td><%= post.comments.count %> / <%= post.viewcount %></td>
+			 				<td>
+			 					<% if current_user.bookmark_posts.include?(post) %>
+			 						<%= link_to "Remove Bookmark", post_bookmark_path(post, current_user.bookmarks.find_by_post_id(post)), method: :delete %>
+			 					<% else %>
+			 						<%= link_to "Bookmark", post_bookmarks_path(post, :user_id => current_user.id), method: :post %>
+			 					<% end %>
+
+			 				</td>
 						</tr>
 					<% end %>
 					<%= submit_tag "Delete selected posts", class: "btn btn-danger" %>
@@ -56,8 +63,8 @@
 					<% else  %>
 						<td><%= post.comments.last.try(:created_at) %></td>
 					<% end %>
-	 				<td><%= post.comments.count %></td>
-	 				<td><%= post.viewcount %></td>
+	 				<td><%= post.comments.count %> / <%= post.viewcount %></td>
+	 				<td></td>
 					</tr>
 				<% end %>
 			<% end %>

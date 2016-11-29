@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :posts, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 
+  has_many :bookmarks, :dependent => :destroy 
+  has_many :bookmark_posts, :through => :bookmarks, source: "post"
+
   def self.from_omniauth(auth)
      # Case 1: Find existing user by facebook uid
      user = User.find_by_fb_uid( auth.uid )
