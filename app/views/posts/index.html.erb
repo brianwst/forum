@@ -12,7 +12,9 @@
 	</ul>
 	<table class="table">
 		<tr>
-			<th></th>
+			<% if current_user && current_user.role == 'admin' %>
+				<th></th>
+			<% end %>
 			<th>Post</th>
 			<th>Creator</th>
 			<th>Posting time</th>

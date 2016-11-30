@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 	before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
-	before_action :find_post, only: [ :show]
-	before_action :find_own_post ,  only: [ :edit, :update, :destroy]
+	before_action :find_post, only: [ :show, :like]
+	before_action :find_own_post ,  only: [:edit, :update, :destroy]
 	def index
 		
 		@posts = Post.published
@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 		when "music"
 			@posts = Category.find_by(name: "Music").posts
 		when "current_affair"
-			@posts = Category.find_by(name: "Cuent Affairs").posts
+			@posts = Category.find_by(name: "Current Affairs").posts
 		else
 			@posts = @posts.all
 		end
@@ -84,6 +84,18 @@ class PostsController < ApplicationController
 		@posts = Post.all
 	end
 
+	def like
+		if current_user.liked_posts.include?(@post)
+			current_user.liked_posts.delete(@post)
+		else
+			current_user.liked_posts << @post
+		end
+		respond_to do |format|
+			format.html {redirect_to post_path(@post)}
+			format.js 
+		end
+	end
+
 
 	# how to add validation#
 	def bulk_update
@@ -108,6 +120,7 @@ class PostsController < ApplicationController
 		params.require(:post).permit(:title, :content, :is_public, :category_ids => [])
 	end
 
+	## Verify whether current user w
 	def find_own_post
 		@post = current_user.posts.find(params[:id])
 	end

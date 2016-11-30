@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125151007) do
+ActiveRecord::Schema.define(version: 20161130052327) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 20161125151007) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "post_categoryships", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "category_id"
@@ -57,6 +66,7 @@ ActiveRecord::Schema.define(version: 20161125151007) do
     t.integer  "user_id"
     t.integer  "comments_count", default: 0
     t.integer  "viewcount",      default: 0
+    t.integer  "likes_count",    default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

@@ -9,6 +9,9 @@ class Post < ApplicationRecord
 
 	has_many :bookmarks, :dependent => :destroy
 	has_many :bookmark_users, through: :bookmarks, source: "user"
+
+	has_many :likes, :dependent => :destroy
+	has_many :liked_users, through: :likes, source: "user"
 	
 	scope :published, -> {where(is_public: true)}
 	scope :draft, -> {where(is_public: false)}

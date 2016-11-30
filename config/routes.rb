@@ -21,6 +21,10 @@ Rails.application.routes.draw do
         	get :about
             post :bulk_update
     	end
+
+        member do 
+            post :like
+        end
 	end
 
 	root to: "posts#index"

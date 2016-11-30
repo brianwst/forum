@@ -1,0 +1,6 @@
+<% if current_user.liked_posts.include?(@post)%>
+	var value = "Unlike"
+<% else %>
+	var value = "Like"
+<% end %>
+$(".like").find("input").val(value)
