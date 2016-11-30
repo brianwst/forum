@@ -5,15 +5,17 @@
 	<p><%= @post.viewcount %></p>
 
 	<% @comments.each do |comment| %>
-		<div class="container reply">
-			<%= comment.content %>
-			<%= comment.user.email %>
-			<%= comment.updated_at %>
+		<div class="container">
+			<div class="reply", id = <%= "comment_#{comment.id}"%>>
+				<%= comment.content %>
+				<%= comment.user.email %>
+				<%= comment.updated_at %>
 
-			<% if current_user.id == comment.user_id %>
-				<%= link_to "delete", post_comment_path(@post, comment), method: :delete %>
-				<%= link_to "edit", edit_post_comment_path(@post, comment) %>
-			<% end %>
+				<% if current_user.id == comment.user_id %>
+					<%= link_to "delete", post_comment_path(@post, comment), method: :delete, remote: true %>
+					<%= link_to "edit", edit_post_comment_path(@post, comment) %>
+				<% end %>
+			</div>
 		</div>
 	<% end %>
 

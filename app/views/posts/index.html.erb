@@ -22,11 +22,13 @@
 			<th>Bookmark</th>
 		</tr>
 		<tbody>
-			<% if current_user && current_user.role == 'admin' %>
+			
 				<%= form_tag bulk_update_posts_path do %>
 					<% @posts.each do |post| %>
 						<tr>
+						<% if current_user && current_user.role == 'admin' %>
 							<td><%= check_box_tag "ids[]", post.id, false %></td>
+						<% end  %>
 							<td><%= link_to "#{post.title}", post_path(post) %></td>
 							<td><%= post.user.email %></td>
 							<td><%= time_ago_in_words(post.created_at) %></td>
@@ -38,35 +40,19 @@
 							<% end %>
 			 				<td><%= post.comments.count %> / <%= post.viewcount %></td>
 			 				<td>
+			 				<% if current_user %>
 			 					<% if current_user.bookmark_posts.include?(post) %>
 			 						<%= link_to "Remove Bookmark", post_bookmark_path(post, current_user.bookmarks.find_by_post_id(post)), method: :delete %>
 			 					<% else %>
 			 						<%= link_to "Bookmark", post_bookmarks_path(post, :user_id => current_user.id), method: :post %>
 			 					<% end %>
-
+							<% end %>
 			 				</td>
 						</tr>
 					<% end %>
 					<%= submit_tag "Delete selected posts", class: "btn btn-danger" %>
-				<% end  %>
 				
-			<% else %>
-				<% @posts.each do |post| %>
-				<tr>
-					<td></td>
-					<td><%= link_to "#{post.title}", post_path(post) %></td>
-					<td><%= post.user.email %></td>
-					<td><%= time_ago_in_words(post.created_at) %></td>
-					<td><%= post.categories.pluck(:name).join(" ") %></td>
-					<% if params[:order] == "last_comment" %>
-						<td><%= post.comments.first.try(:created_at) %></td>
-					<% else  %>
-						<td><%= post.comments.last.try(:created_at) %></td>
-					<% end %>
-	 				<td><%= post.comments.count %> / <%= post.viewcount %></td>
-	 				<td></td>
-					</tr>
-				<% end %>
+			
 			<% end %>
 		</tbody>	
 

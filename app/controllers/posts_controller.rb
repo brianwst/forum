@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 	before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
-	before_action :find_post, only: [ :show, :edit, :update, :destroy]
+	before_action :find_post, only: [ :show]
+	before_action :find_own_post ,  only: [ :edit, :update, :destroy]
 	def index
 		
 		@posts = Post.published
@@ -63,7 +64,7 @@ class PostsController < ApplicationController
 
 	def update
 
-		if @post.update(post_params)
+		if @post.user == current_user && @post.update(post_params)
 			flash[:notice] = "Successfully created updated."
 			redirect_to post_path(@post)
 		else
@@ -107,4 +108,7 @@ class PostsController < ApplicationController
 		params.require(:post).permit(:title, :content, :is_public, :category_ids => [])
 	end
 
+	def find_own_post
+		@post = current_user.posts.find(params[:id])
+	end
 end
