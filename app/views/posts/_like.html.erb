@@ -1,0 +1,13 @@
+<% if current_user.liked_posts.include?(@post) %>
+	<%= button_to "Unlike", like_post_path(@post), remote: true, class: "btn btn-info" %>
+<% else %>
+	<%= button_to "Like", like_post_path(@post), remote: true, class: "btn btn-info" %>
+<% end %>
+
+<p><%= @post.likes_count %> people like the post</p>
+
+<p>
+	<% @post.liked_users.each do |f| %>
+		<%=  f.email %>
+	<% end %>
+</p>

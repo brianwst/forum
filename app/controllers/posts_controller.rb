@@ -85,13 +85,16 @@ class PostsController < ApplicationController
 	end
 
 	def like
-		if current_user.liked_posts.include?(@post)
-			current_user.liked_posts.delete(@post)
+		@liked_posts = current_user.liked_posts
+		if @liked_posts.include?(@post)
+			current_user.likes.find_by_post_id(@post).destroy
 		else
-			current_user.liked_posts << @post
+			current_user.likes.create(:user_id => current_user, :post_id => @post.id)  
 		end
+
+		##Need to get new data from the database of @post again
+		@post.reload
 		respond_to do |format|
-			format.html {redirect_to post_path(@post)}
 			format.js 
 		end
 	end

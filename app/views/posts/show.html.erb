@@ -5,8 +5,9 @@
 	<p><%= @post.viewcount %></p>
 	
 	<div class="like">
-		<%= button_to "Like", like_post_path(@post), remote: true, class: "btn btn-info" %>
+		<%= render "like" %>
 	</div>
+
 
 	<% @comments.each do |comment| %>
 		<div class="container">
