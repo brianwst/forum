@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_filter :authenticate_user!, only: [:new, :edit, :update, :destroy]
+	, only: [:new, :edit, :update, :destroy]
 	before_action :find_post, only: [ :show, :like]
 	before_action :find_own_post ,  only: [:edit, :update, :destroy]
 	def index
@@ -112,6 +112,7 @@ class PostsController < ApplicationController
 
 		redirect_to posts_path
 	end
+
 
 
 	private
