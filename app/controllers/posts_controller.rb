@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
-	, only: [:new, :edit, :update, :destroy]
+	before_action :find_post, only: [:new, :edit, :update, :destroy]
 	before_action :find_post, only: [ :show, :like]
 	before_action :find_own_post ,  only: [:edit, :update, :destroy]
+
+
 	def index
 		
 		@posts = Post.published
@@ -102,6 +104,10 @@ class PostsController < ApplicationController
 
 	# how to add validation#
 	def bulk_update
+		if current_user.role != "admin"
+			redirect_to posts_path
+			raise "You are not admin";
+		end
 		ids = Array(params[:ids])
 		posts = ids.map{ |i| Post.find_by_id(i) }.compact
 		

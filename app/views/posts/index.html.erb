@@ -52,7 +52,10 @@
 			 				</td>
 						</tr>
 					<% end %>
-					<%= submit_tag "Delete selected posts", class: "btn btn-danger" %>
+					<% if current_user && current_user.role == 'admin' %>
+						<%= submit_tag "Delete selected posts", class: "btn btn-danger" %>
+					<% end %>
+
 				
 			
 			<% end %>
