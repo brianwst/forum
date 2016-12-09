@@ -1,5 +1,16 @@
 <div class="container">
 	<h1><%= @post.title %> by <%= @post.user.email %></h1>
+	<%= form_for(@tag, url: post_tags_path(@post), :remote => true) do |f|  %>
+		<div class="form-group">
+			<%= f.label :name, 'Create tags' %>
+			<%= f.text_field :name, class: "form-control" %>
+			<%= f.submit :class =>  "btn btn-info" %>
+
+		</div>
+	<% end %>
+	<div class="tags">
+		
+	</div>
 
 	<p><%= @post.content %></p>
 	<p><%= @post.viewcount %></p>

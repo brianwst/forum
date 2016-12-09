@@ -42,6 +42,7 @@ class PostsController < ApplicationController
 		@post.view!
 		@comment = Comment.new
 		@comments = @post.comments.includes(:user).published
+		@tag = @post.tags.build
 	end
 
 	def new

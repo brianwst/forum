@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130052327) do
+ActiveRecord::Schema.define(version: 20161208143820) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer  "user_id"
@@ -68,6 +68,21 @@ ActiveRecord::Schema.define(version: 20161130052327) do
     t.integer  "viewcount",      default: 0
     t.integer  "likes_count",    default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "tag_posts", force: :cascade do |t|
+    t.integer  "post_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_tag_posts_on_post_id"
+    t.index ["tag_id"], name: "index_tag_posts_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

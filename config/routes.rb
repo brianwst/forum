@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 	resources :posts do
 		resources :comments, :controller => 'post_comments'
         resources :bookmarks, only: [:create, :destroy]
+        resources :tags, only: [:create, :destroy]
 
 		collection do
         	get :about
