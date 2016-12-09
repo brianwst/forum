@@ -2,6 +2,12 @@
 <div id="main" class="container">	
 <%= link_to "Admin", admin_posts_path %>
 
+<%= form_tag(posts_path, method: :get) do %>
+  <%= text_field_tag "keyword", nil, placeholder: "Search by tag" %>
+  <%= submit_tag "Search", class: "btn btn-default"%>
+<% end %>
+
+
 	<%= Time.now %>
 	<ul class="nav nav-tabs">
 	  <li role="presentation" class="active"><%= link_to "All", posts_path %></li>

@@ -1,2 +1,3 @@
+var html = "<span class='label label-default'>" + "<%= @tag.name %>" + "</span>"
 
-$('.tags').html('<%= @tag.name %>');
+$('.tags').append(html);

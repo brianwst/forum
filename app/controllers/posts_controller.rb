@@ -35,6 +35,10 @@ class PostsController < ApplicationController
 			@posts = @posts.all
 		end
 
+		if params[:keyword]
+			@posts = Tag.find_by(name: params[:keyword]).posts
+		end
+
 		
 	end
 
@@ -43,6 +47,8 @@ class PostsController < ApplicationController
 		@comment = Comment.new
 		@comments = @post.comments.includes(:user).published
 		@tag = @post.tags.build
+		@tags = Post.includes(:tags).find_by_id(params[:id]).tags
+
 	end
 
 	def new

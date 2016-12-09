@@ -3,7 +3,8 @@ class TagsController < ApplicationController
 
 	def create
 		@tag = Tag.new(params_tag)
-		if @tag.save
+		if @tag.save 
+			@post.tag_posts.create(:post_id => @post.id, :tag_id => @tag.id)
 			respond_to do |format|
 				format.js
 			end
@@ -13,7 +14,7 @@ class TagsController < ApplicationController
 		end
 
 	end
-
+	
 	private
 	def set_post
 		@post = Post.find(params[:post_id])
