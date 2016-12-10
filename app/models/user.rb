@@ -13,7 +13,9 @@ class User < ApplicationRecord
   has_many :likes, :dependent => :destroy
   has_many :liked_posts, :through => :likes, source: "post"
 
-
+  def to_param
+    nickname
+  end
 
   def self.from_omniauth(auth)
      # Case 1: Find existing user by facebook uid
