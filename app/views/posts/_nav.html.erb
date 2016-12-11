@@ -26,7 +26,12 @@
                             <%= link_to('登出', destroy_user_session_path, :method => :delete) %> 
                         </li>
                         <li>
-                            <%= link_to "Your Profile", user_path(current_user.nickname) %>
+                            <% if current_user.nickname %>
+                                <%= link_to "Your Profile", user_path(current_user.nickname) %>
+                            <% else %>
+                                <%= link_to "Your Profile", user_path(current_user.id) %>
+                            <% end %>
+
                         </li>
                     <% else %>
                         <li>

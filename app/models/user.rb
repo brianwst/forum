@@ -17,6 +17,7 @@ class User < ApplicationRecord
     nickname
   end
 
+
   def self.from_omniauth(auth)
      # Case 1: Find existing user by facebook uid
      user = User.find_by_fb_uid( auth.uid )
@@ -47,4 +48,6 @@ class User < ApplicationRecord
      user.save!
      return user
    end
+
+
 end
