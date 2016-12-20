@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :index]
     resources :friendships, only: [:create, :destroy]
 
+    resources :todos
 
     namespace :admin do
         resources :categories

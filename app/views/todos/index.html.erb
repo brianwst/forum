@@ -1,0 +1,30 @@
+<h1>Vue.js</h1>
+
+<div id="app">
+  <h2 v-if="statement">You can view this page</h2>
+  <h2 :style="style" :title="abc">You cannot view this page</h2>
+  <ul>
+
+  	<li v-for="todo in todos">{{todo.text}}</li>
+  </ul>
+  <p>{{message}}</p>
+  <input type="text" v-model="message">
+</div>
+
+<script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    statement: true, 
+    style: "color: red;",
+    abc: "This is awesome",
+    todos: [
+    	{text: "abc"},
+    	{text: "def"},
+    	{text: ",m,"}
+    ],
+    message: "Halo Vue world"
+  }
+})
+</script>
