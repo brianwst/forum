@@ -22,3 +22,4 @@
 
 #Ignore facebook yml
 /config/facebook.yml
+/config/secrets.yml
